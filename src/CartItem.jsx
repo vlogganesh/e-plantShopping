@@ -6,9 +6,19 @@ import './CartItem.css';
 const CartItem = ({ onContinueShopping }) => {
   const cart = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
+  // Calculate total quantity of  all products in the cart
+  const calculateTotalItems = () => {
+     let totalItems=0;
+     cart.forEach((item) => {
+         totalItems++;
+     });
+     return totalItems
+   };
+   var totalQty=calculateTotalItems();
 
   // Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
+    let totalCost = 0;
     cart.forEach((item) => {
             totalCost += item.cost * item.quantity;
     });
@@ -24,6 +34,8 @@ const CartItem = ({ onContinueShopping }) => {
 
   const handleIncrement = (item) => {
     dispatch(updateQuantity({'name':item.name,'quantity':item.quantity+1}));
+    const itembool = cart.find((cartitem) => cartitem.name === item.name);
+    if(!itembool){totalQty++;}
   };
 
   const handleDecrement = (item) => {
@@ -31,6 +43,7 @@ const CartItem = ({ onContinueShopping }) => {
         dispatch(updateQuantity({'name':item.name,'quantity':item.quantity-1}));
     }else{
         handleRemove(item)
+        totalQty--;
     }
   };
 
@@ -40,7 +53,11 @@ const CartItem = ({ onContinueShopping }) => {
 
   // Calculate total cost based on quantity for an item
   const calculateTotalCost = (item) => {
-    
+    let totalCost=0 
+    cart.forEach((CartItem) => {
+        if(item.name==CartItem.name){totalCost += CartItem.cost * CartItem.quantity}
+    });
+    return totalCost
   };
 
   return (
@@ -64,7 +81,7 @@ const CartItem = ({ onContinueShopping }) => {
           </div>
         ))}
       </div>
-      <div style={{ marginTop: '20px', color: 'black' }} className='total_cart_amount'></div>
+      <div style={{ marginTop: '20px', color: 'black' }} className='total_cart_amount'>TotalQty: {totalQty}</div>
       <div className="continue_shopping_btn">
         <button className="get-started-button" onClick={(e) => handleContinueShopping(e)}>Continue Shopping</button>
         <br />
