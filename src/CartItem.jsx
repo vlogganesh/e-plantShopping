@@ -44,16 +44,16 @@ const CartItem = ({ onContinueShopping }) => {
   };
 
   const handleDecrement = (item) => {
-    if(item.quantity!=0){
-        dispatch(updateQuantity({'name':item.name,'quantity':item.quantity-1}));
-    }else{
-        handleRemove(item)
-        totalQty--;
+    if (item.quantity > 1) {
+        // Reduce the quantity if it's greater than 1
+        dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
+    } else if (item.quantity === 1) {
+        // Remove the item when the quantity reaches 1
+        dispatch(removeItem(item.name))
     }
   };
-
   const handleRemove = (item) => {
-    dispatch(removeItem(item))
+    dispatch(removeItem(item.name))
   };
 
   // Calculate total cost based on quantity for an item
@@ -101,5 +101,3 @@ const CartItem = ({ onContinueShopping }) => {
 };
 
 export default CartItem;
-
-
