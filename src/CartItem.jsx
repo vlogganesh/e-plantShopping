@@ -20,7 +20,7 @@ const CartItem = ({ onContinueShopping }) => {
   };
 
   const handleContinueShopping = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     console.log("Continue shopping clicked")
     onContinueShopping(); // call the parent function
   };
