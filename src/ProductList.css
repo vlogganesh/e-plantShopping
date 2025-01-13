@@ -117,8 +117,8 @@ body {
     background-color: #e74c3c;
     color: #fff;
     position: absolute;
-    top: 200px;
-    right: 200px;
+    top: 0;
+    right: 0;
     padding: 5px 10px;
     border-radius: 0 0 0 5px;
     
@@ -219,6 +219,22 @@ body {
   .product-button.added-to-cart {
     background-color: grey; /* Grey when product is added */
   }
+  .cart-badge {
+    position: absolute; /* Position it relative to the parent container */
+    top: 45px; /* Adjust to align vertically */
+    right: 45px; /* Adjust to align horizontally */
+    transform: translate(50%, -50%); /* Center the badge relative to its top-right corner */
+    color: white; /* Text color */
+    font-size: 20px; /* Font size for the badge text */
+    font-weight: bold; /* Make the text bold for better visibility */
+    border-radius: 50%; /* Make the badge circular */
+    padding: 4px 8px; /* Adjust the padding for size */
+    display: flex; /* Flexbox for centering content */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    z-index: 1; /* Ensure it stays on top */
+  }
+
   @media (max-width: 1200px) {
     .product-card {
       flex: 1 1 calc(33.33% - 20px); /* Adjust width for 3 cards per row with 20px gap on medium screens */
